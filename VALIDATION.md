@@ -65,3 +65,9 @@
 TIGAS는 일반 영역의 이진 라벨만 제공하므로 `fake_type=unknown`, `domain=general`로 저장합니다. TrueTrade A/B/C로 임의 지정하지 않습니다. 원본 라벨과 split, 실제 이미지 경로 및 해시 검사를 수행했고 Real 5/Fake 5 샘플 그림을 생성·검토했습니다. 실제 TIGAS 세 split의 384px 전체 이미지 배치 로딩도 통과했습니다. 이 데이터로 모델 학습은 아직 실행하지 않았으며 TrueTrade 인증샷 데이터도 여전히 별도 준비가 필요합니다.
 
 다운로드 관련 테스트는 Python 3.14에서 10개, 기존 프로젝트 전체 회귀는 Python 3.11에서 31개가 통과했습니다. 상세 사용법·실제 원격 구조·추가 검증 결과는 `TIGAS_DOWNLOAD.md`, 기계 확인표는 `data/tigas/verification.json`을 참고하세요. 각 2,000장 다운로드는 설정과 quota 계산만 검증했으며 실제 4,000장 다운로드는 실행하지 않았습니다.
+
+## 추가 작업: Grad-CAM XAI
+
+`src/explain.py`와 `src.predict --explain`을 추가했습니다. 기존 EfficientNet-B0 `network.conv_head`를 대상으로 Fake logit의 gradient를 역전파하며 checkpoint, 학습 및 평가 코드는 변경하지 않았습니다. letterbox 여백을 제거해 원본에 정렬한 heatmap/overlay와 확률·격자 집계 기반 설명을 저장합니다. 강조 위치를 실제 조작 영역으로 단정하지 않으며 의미적 이미지 특징도 추측하지 않습니다.
+
+XAI 단위 테스트 10개와 전체 회귀 41개가 통과했습니다. 실제 학습된 TIGAS checkpoint로 CUDA와 CPU에서 forward/backward, 12×12 feature map과 finite nonzero gradient, 기존 예측과의 일치 및 checkpoint 파일 불변을 검증했습니다. 기존 test 20장 평가도 재실행해 지표·이미지별 판정이 동일함을 확인했습니다. 추가 학습은 하지 않았습니다. 상세 사용법은 `XAI.md`, 실제 결과 그림은 `outputs/explanations/tigas_example/explanation.png`, 검증 기록은 `outputs/explanations/xai_verification.json`을 참고하세요.

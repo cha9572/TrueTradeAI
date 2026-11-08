@@ -1,5 +1,7 @@
 # TrueTrade AI — Model 1
 
+**XAI / Grad-CAM:** 단일 이미지 예측에 `--explain`을 추가하면 기존 checkpoint로 Fake 판단에 대한 heatmap·overlay·좌표 기반 설명을 저장합니다. 사용법과 해석 한계는 [XAI.md](XAI.md)를 참고하세요. 강조 영역은 검증된 AI 조작 영역이 아닙니다.
+
 **TIGAS 선택 다운로드:** Python 3.14에서 Real/Fake 각 100장만 받는 명령과 각 2,000장으로 확대하는 방법은 [TIGAS_DOWNLOAD.md](TIGAS_DOWNLOAD.md)를 참고하세요. 자동 생성 CSV는 `data/tigas/metadata.csv`, 전용 학습 설정은 `configs/tigas_train.yaml`입니다. 일반 AI 이미지의 유형 미지정 Fake는 `fake_type=unknown`으로 지원하며 A/B/C로 임의 분류하지 않습니다.
 
 이미지 **전체**를 입력받아 AI 생성·조작 의심 점수(0~1)를 출력하는 이진 분류 프로젝트입니다. EfficientNet-B0 → Global Average Pooling → 출력 1개, 학습은 `BCEWithLogitsLoss`, 추론은 sigmoid를 사용합니다. 이 점수는 검증·보정 전에는 실제 확률로 해석할 수 없습니다.
