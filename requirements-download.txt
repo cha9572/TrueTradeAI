@@ -1,0 +1,6 @@
+# Standalone downloader/preview: Python 3.11-3.14; no torch/pandas/datasets required.
+huggingface_hub>=1.0,<3
+Pillow>=11,<14
+matplotlib>=3.10,<4
+filelock>=3.10,<5
+tqdm>=4.66,<5

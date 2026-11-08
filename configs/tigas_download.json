@@ -1,0 +1,14 @@
+{
+  "repo_id": "H1merka/TIGAS_dataset",
+  "revision": "6005716de6e91a243090987e2017af9e0b8565e7",
+  "output_dir": "data/tigas",
+  "per_class": 100,
+  "split_ratios": {"train": 0.8, "val": 0.1, "test": 0.1},
+  "seed": 42,
+  "max_image_mb": 25,
+  "max_download_mb": 4096,
+  "retries": 2,
+  "max_failures": 10,
+  "preview_count": 10,
+  "preview_path": "outputs/tigas/samples.png"
+}

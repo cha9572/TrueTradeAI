@@ -1,0 +1,28 @@
+# Synthetic pipeline check only. Never report these metrics as detector performance.
+seed: 42
+data:
+  metadata: data/smoke/metadata.csv
+  root: .
+  leakage_columns: [photographer_id, item_id]
+  verify_images: true
+model:
+  name: efficientnet_b0
+  pretrained: false
+  input_size: 64
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+  drop_rate: 0.2
+training:
+  device: auto
+  epochs: 1
+  batch_size: 4
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  num_workers: 0
+  amp: true
+  amp_init_scale: 16
+  patience: 5
+  threshold: 0.5
+  tune_threshold: true
+  output_dir: outputs/smoke
+  allow_smoke: true

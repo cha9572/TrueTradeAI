@@ -1,0 +1,11 @@
+# Install the matching torch/torchvision CUDA wheels first (see README).
+torch>=2.5,<3
+torchvision>=0.20,<1
+numpy>=1.26,<3
+timm>=1.0,<2
+scikit-learn>=1.5,<2
+pandas>=2.2,<3
+Pillow>=10.4,<13
+matplotlib>=3.9,<4
+tqdm>=4.66,<5
+PyYAML>=6.0,<7
